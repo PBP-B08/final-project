@@ -32,43 +32,37 @@ Cultural Center merupakan aplikasi yang menjadi sarana mempromosikan kebudayaan 
    - Detail fitur:
       - Halaman login
       - Halaman register
-2. Dashboard profile
-   - Developer: [Naila Shafirni Hidayat](https://github.com/nailashfrni)
-   - Deskripsi: Halaman yang menampilkan dan mengedit informasi user yang sedang login
-   - Detail fitur:
-      - Profile page
-      - Edit profile
-3. Homepage
+2. Homepage
    - Developer: [Naila Shafirni Hidayat](https://github.com/nailashfrni)
    - Deskripsi: Halaman utama yang berisi menu fitur-fitur aplikasi
    - Detail fitur:
       - Landing Page
-4. Event calendar
+3. Event calendar
    - Developer: [Gabriel Edgar Firdausyah N](https://github.com/nois44)
    - Deskripsi: Halaman yang menampilkan event terdekat kebudayaan di Indonesia yang dikategorikan berdasarkan bulan.
    - Detail fitur:
       - Calendar upcoming event
-5. Recommendation
+4. Recommendation
    - Developer: [Natanael Pascal Simbolon](https://github.com/V1ct0riaa) (Culture highlight), [Muhammad Vicky Maulana](https://github.com/electyrion) (Deskripsi & Places to go)
    - Deskripsi: Halaman yang menampilkan deskripsi umum mengenai provinsi, rekomendasi tempat untuk destinasi wisata, serta highlight kebudayaan khas daerah.
    - Detail fitur:
       - Deskripsi
       - Places to go
       - Culture highlight
-6. Things to do
+5. Things to do
    - Developer: [Naila Shafirni Hidayat](https://github.com/nailashfrni)
    - Deskripsi: Halaman yang menampilkan informasi mengenai rekomendasi makanan populer dan event atau perayaan tahunan khas daerah.
    - Detail fitur:
       - Food
       - Events
-7. FAQ dan Review
+6. FAQ dan Review
    - Developer: [Achmad Noval Fahrezi](https://github.com/novalzfahr)
    - Deskripsi: Halaman yang menampilkan pertanyaan-pertanyaan yang sering diajukan mengenai suatu daerah, serta ulasan pengguna yang pernah mengunjungi daerah tersebut
    - Detail fitur:
       - Daftar FAQ
       - Daftar review pengguna
       - Form review
-8. Plan Your Trip
+7. Plan Your Trip
    - Developer: [Muhammad Tarreq Maulana](https://github.com/mrtrq)
    - Deskripsi: Halaman yang menampilkan paket-paket wisata untuk mempermudah wisatawan dalam merencanakan wisata mereka ke suatu daerah.
    - Detail fitur:
@@ -90,8 +84,8 @@ Cultural Center merupakan aplikasi yang menjadi sarana mempromosikan kebudayaan 
 - Mengunjungi halaman dashboard profil dan memodifikasi profil
 - Mengakses halaman Plan Your Trip
 
-### Admin (Super user)
+## Alur Integrasi Web
 
-- Mengakses semua modul
-- Menambahkan provinsi dan area baru pada halaman Recommendation
-- Menambahkan food dan event baru pada halaman Things to Do
+1. Menginstall dependency http
+2. Membuat fungsi yang dapat melakukan fetch data atau mengirim request HTTP pada endpoint JSON di Railway
+3. Memproses data yang telah didapat dengan FutureBuilder
