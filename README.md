@@ -86,6 +86,8 @@ Cultural Center merupakan aplikasi yang menjadi sarana mempromosikan kebudayaan 
 
 ## Alur Integrasi Web
 
-1. Menginstall dependency http
-2. Membuat fungsi yang dapat melakukan fetch data atau mengirim request HTTP pada endpoint JSON di Railway
-3. Memproses data yang telah didapat dengan FutureBuilder
+1. Menginstall dependency http agar dapat mengirim request HTTP ke internet
+2. Membuat model yang sesuai dengan struktur data JSON yang didapat dari endpoint di Railway
+3. Membuat fungsi yang dapat melakukan fetch data atau mengirim request HTTP pada endpoint JSON
+4. Melakukan konversi object yang telah didapat dari web service menjadi model yang telah dibuat sebelumnya pada tahap kedua
+5. Memproses data yang telah dikonversi dengan FutureBuilder sehingga data dapat ditampilkan di aplikasi Flutter
