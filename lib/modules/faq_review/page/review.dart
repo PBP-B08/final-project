@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:cultural_center/modules/faq_review/drawer/myDrawer.dart';
-import 'package:cultural_center/modules/faq_review/model/dataReview.dart';
+import 'package:cultural_center/widgets/drawer.dart';
 import 'package:cultural_center/modules/faq_review/data/fetchDataReview.dart';
 import 'package:cultural_center/modules/faq_review/Widget/widgetReview.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
+import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class MyReviewPage extends StatefulWidget {
     const MyReviewPage({Key? key}) : super(key: key);
@@ -21,6 +22,16 @@ class _ReviewState extends State<MyReviewPage> {
     var c1 = const Color(0Xffa770ef);
     var c2 = const Color(0Xffd8b4fe);
     var c3 = const Color(0Xfffdb99b);
+
+    Future<http.Response> deleteReview(int id) async {
+      var url ='https://cultural-center.up.railway.app/faq-review/delete_flutter/$id/';
+      final http.Response response = await http.delete(
+        Uri.parse(url, 
+        ),
+      );
+      return response;
+    }
+
     @override
     Widget build(BuildContext context){
             return Scaffold(
@@ -74,31 +85,57 @@ class _ReviewState extends State<MyReviewPage> {
                                     itemBuilder: (_, index)=> Container(
                                     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                                     padding: const EdgeInsets.all(20.0),
-                                    decoration: BoxDecoration(
-                                        color:Colors.white,
-                                        borderRadius: BorderRadius.circular(15.0),
-                                        boxShadow: const [
-                                        BoxShadow(
-                                            color: Colors.black,
-                                            blurRadius: 2.0
-                                        )
-                                        ]
-                                    ),
-                                    child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                        Text(
-                                            "${snapshot.data![index].fields.title}",
-                                            style: const TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold,
+                                    child: Card(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15.0) 
+                                        ),
+                                        child: SizedBox(
+                                          height: 180,
+                                          child: Container(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "${snapshot.data![index].fields.title}",
+                                                      style: const TextStyle(
+                                                      fontSize: 18.0,
+                                                      fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    IconButton(
+                                                      onPressed: () async {
+                                                        await deleteReview(snapshot.data![index].pk);
+                                                        // ignore: use_build_context_synchronously
+                                                        Navigator.popAndPushNamed(context, "/review");
+                                                      },
+                                                      icon: const Icon(Icons.delete),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    const Icon(Icons.supervised_user_circle_rounded),
+                                                    Text(
+                                                      "${snapshot.data![index].fields.username}",
+                                                      ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    const Icon(Icons.reviews_outlined),
+                                                    Text(
+                                                      "${snapshot.data![index].fields.review}",
+                                                      ),
+                                                  ],
+                                                ),                                                                                                                                                
+                                              ],
+                                            ), 
                                             ),
                                         ),
-                                        const SizedBox(height: 10),
-                                        Text("${snapshot.data![index].fields.review}"),
-                                        ],
-                                    ),
+                                    ), 
                                     )
                                 );
                             }
@@ -111,5 +148,5 @@ class _ReviewState extends State<MyReviewPage> {
             )
           ) 
         );
-    }
+    }  
 }

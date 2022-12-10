@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:cultural_center/modules/faq_review/drawer/myDrawer.dart';
+import 'package:cultural_center/widgets/drawer.dart';
 import 'package:cultural_center/modules/faq_review/model/modelFaq.dart';
 import 'package:cultural_center/modules/faq_review/data/fetchDataFaq.dart';
 import 'package:cultural_center/modules/faq_review/page/review.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 
@@ -19,6 +21,7 @@ class _FaqState extends State<MyFaqPage> {
     var c3 = const Color(0Xfffdb99b);
     @override
     Widget build(BuildContext context){
+      final request = context.watch<CookieRequest>();
             return Scaffold(
             appBar: AppBar(
                 title: const Text('Faq'),
@@ -62,7 +65,10 @@ class _FaqState extends State<MyFaqPage> {
                                     return ListView.builder(
                                         itemCount: snapshot.data!.length,
                                         itemBuilder: (_, index)=> Container(
-                                            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 16, 
+                                                vertical: 12,
+                                            ),
                                             padding: const EdgeInsets.all(20.0),
                                             decoration: BoxDecoration(
                                                 color: Colors.white,
@@ -76,11 +82,11 @@ class _FaqState extends State<MyFaqPage> {
                                                 ]
                                             ),
                                             child: ExpansionTile(
-                                                title: Text("${snapshot.data![index].fields.question}"),
-                                                children: [
-                                                    Padding(
-                                                        padding: const EdgeInsets.all(20.0),
-                                                        child: Text(
+                                              title: Text("${snapshot.data![index].fields.question}"),
+                                              children: [
+                                                Padding(
+                                                      padding: const EdgeInsets.all(20.0),
+                                                      child: Text(
                                                           "${snapshot.data![index].fields.answer}"
                                                       )
                                                   )
@@ -111,8 +117,44 @@ class _FaqState extends State<MyFaqPage> {
                         ),
                       ElevatedButton(
                         child: const Text("Share Your Story!"),
-                        onPressed: () {
-                          Navigator.of(context).push<void>(_createRoute());
+                        onPressed: () async {
+                          !request.loggedIn
+                          ? showDialog(
+                            context: context, 
+                            builder: (context) {
+                              return Dialog(
+                                shape:
+                                    RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(10),
+                                ),
+                                elevation: 15,
+                                child: ListView(
+                                  padding:
+                                      const EdgeInsets.only(
+                                          top: 20,
+                                          bottom: 20),
+                                  shrinkWrap: true,
+                                  children: <Widget>[
+                                    const Center(
+                                        child: Text(
+                                            'Please Login!')),
+                                    const SizedBox(
+                                        height: 20),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(
+                                            context);
+                                      },
+                                      child: const Text(
+                                          'Kembali'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          )
+                          : Navigator.of(context).push<void>(_createRoute());
                         },
                         )
                   ],

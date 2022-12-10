@@ -1,10 +1,11 @@
-import 'package:cultural_center/modules/faq_review/drawer/myDrawer.dart';
+import 'package:cultural_center/widgets/drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart'; 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:cultural_center/authentication/login.dart';
+import 'package:cultural_center/modules/faq_review/page/review.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         home: const MyHomePage(title: 'Cultural Center'),
         routes: {
           "/login": (BuildContext context) => const LoginPage(),
+          "/review": (BuildContext context) => const MyReviewPage(), 
         },
       ),
     );
