@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.lightGreen,
         ),
-        home: const MyHomePage(title: 'Flutter App'),
+        home: const MyHomePage(title: 'Cultural Center'),
         routes: {
           "/login": (BuildContext context) => const LoginPage(),
         },
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'This is the home page',
+                'This is the landing page',
               ),
             ),
             // button to redirect to login page
