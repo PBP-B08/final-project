@@ -1,4 +1,4 @@
-import '../../../model/food.dart';
+import '../model/food.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

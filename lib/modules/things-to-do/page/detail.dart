@@ -1,9 +1,7 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import '../../../drawer.dart';
-import '../API/fetchEvent.dart';
-import '../API/fetchFood.dart';
+import 'package:cultural_center/widgets/drawer.dart';
+import 'package:cultural_center/modules/things-to-do/API/fetchEvent.dart';
+import 'package:cultural_center/modules/things-to-do/API/fetchFood.dart';
 
 class DetailThingsPage extends StatefulWidget {
   final int provId;
@@ -33,7 +31,7 @@ class _DetailThingsPageState extends State<DetailThingsPage> {
       appBar: AppBar(
         title: Text("Things to Do in $provName"),
       ),
-      drawer: DrawerApp(),
+      drawer: const MyDrawer(),
       body: SingleChildScrollView(child:
       Column(children: [
         const SizedBox(height: 30),

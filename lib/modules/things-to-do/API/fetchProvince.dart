@@ -1,4 +1,4 @@
-import '../../../model/province.dart';
+import '../model/province.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

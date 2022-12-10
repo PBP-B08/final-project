@@ -1,5 +1,5 @@
 import 'package:cultural_center/modules/things-to-do/API/fetchProvince.dart';
-import '../../../drawer.dart';
+import 'package:cultural_center/widgets/drawer.dart';
 import 'detail.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class _ThingsToDoPageState extends State<ThingsToDoPage> {
         appBar: AppBar(
           title: const Text('Things to Do'),
         ),
-        drawer: DrawerApp(),
+        drawer: const MyDrawer(),
         body: FutureBuilder(
             future: fetchProvince(),
             builder: (context, AsyncSnapshot snapshot) {
@@ -50,15 +50,14 @@ class _ThingsToDoPageState extends State<ThingsToDoPage> {
                               BoxShadow(color: Colors.black, blurRadius: 2.0)
                             ]),
                         child: ListTile(
-                                // leading: FlutterLogo(size: 72.0),
-                                title: Text(
-                                    "${snapshot.data![index].fields.title}"),
-                                subtitle: Text(
-                                  "${snapshot.data![index].fields.header}",
-                                ),
-                                // trailing: Icon(Icons.more_vert),
-                                isThreeLine: true,
-                              ),
+                          // leading: FlutterLogo(size: 72.0),
+                          title: Text("${snapshot.data![index].fields.title}"),
+                          subtitle: Text(
+                            "${snapshot.data![index].fields.header}",
+                          ),
+                          // trailing: Icon(Icons.more_vert),
+                          isThreeLine: true,
+                        ),
                       ),
                       onTap: () {
                         // Route menu ke halaman detail

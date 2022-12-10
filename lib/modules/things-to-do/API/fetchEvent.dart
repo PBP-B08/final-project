@@ -1,4 +1,4 @@
-import '../../../model/event.dart';
+import '../model/event.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
