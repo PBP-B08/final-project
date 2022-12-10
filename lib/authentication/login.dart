@@ -10,12 +10,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool showPassword = false;
   final _formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   String username = "";
   String password = "";
   String _errorMessage = "";
+
+  // function to toggle the password visibility
+  void togglePasswordVisibility() {
+    setState(() {
+      showPassword = !showPassword;
+    });
+  }
 
   @override
   void dispose() {
@@ -57,11 +65,22 @@ class _LoginPageState extends State<LoginPage> {
                     }
                 ),
                 TextFormField(
-                    obscureText: true,
-                    decoration: const InputDecoration(
+                    obscureText: showPassword ? false : true,
+                    decoration:  InputDecoration(
                       hintText: "password",
                       labelText: "password",
-                      icon: Icon(Icons.lock, color: Colors.blue),
+                      suffixIcon: GestureDetector(
+                        onTap:() {
+                          togglePasswordVisibility();
+                        },
+                        child: Icon(
+                          showPassword ? Icons.visibility : Icons.visibility_off,
+                          color: Colors.lightGreen,
+                        ),
+                        // child: const Icon(Icons.remove_red_eye),
+                      
+                      ),
+                      icon: const Icon(Icons.lock, color: Colors.blue),
                     ),
                     controller: passwordController,
                     validator: (value) {
