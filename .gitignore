@@ -47,3 +47,6 @@ app.*.map.json
 # See https://flutter.dev/docs/deployment/android#reference-the-keystore-from-the-app
 *.keystore
 *.jks
+
+# ignore .vscode folder
+.vscode/
