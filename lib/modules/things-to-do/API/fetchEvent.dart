@@ -1,20 +1,18 @@
-import 'package:counter_7/model/watch_list.dart';
+import '../../../model/event.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-late WatchList showedWatchList;
-List<bool> listStatus = [];
-int indexStatus = 0;
+// late Food foodlist;
 
-bool getStatusBool(Watched isWatched) {
-  if (isWatched == Watched.YES) {
-    return true;
-  }
-  return false;
-}
+// bool getStatusBool(Watched isWatched) {
+//   if (isWatched == Watched.YES) {
+//     return true;
+//   }
+//   return false;
+// }
 
-Future<List<WatchList>> fetchWatchList() async {
-  var url = Uri.parse('http://katalog-app-pbp.herokuapp.com/mywatchlist/json/');
+Future<List<Event>> fetchEvent(int provId) async {
+  var url = Uri.parse('https://cultural-center.up.railway.app/things-to-do/json/event/$provId/');
   var response = await http.get(
     url,
     headers: {
@@ -27,14 +25,14 @@ Future<List<WatchList>> fetchWatchList() async {
   var data = jsonDecode(utf8.decode(response.bodyBytes));
 
   // melakukan konversi data json menjadi object ToDo
-  List<WatchList> watchList = [];
+  List<Event> eventList = [];
   for (var d in data) {
     if (d != null) {
-      var dataList = WatchList.fromJson(d);
-      watchList.add(dataList);
-      listStatus.add(getStatusBool(dataList.fields.watched));
+      var dataList = Event.fromJson(d);
+      eventList.add(dataList);
+      // listStatus.add(getStatusBool(dataList.fields.watched));
     }
   }
 
-  return watchList;
+  return eventList;
 }

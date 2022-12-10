@@ -1,3 +1,5 @@
+import 'package:cultural_center/modules/things-to-do/API/fetchProvince.dart';
+import '../../../drawer.dart';
 import 'detail.dart';
 import 'package:flutter/material.dart';
 
@@ -9,16 +11,15 @@ class ThingsToDoPage extends StatefulWidget {
 }
 
 class _ThingsToDoPageState extends State<ThingsToDoPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Things to Do'),
         ),
-        // drawer: DrawerApp(),
+        drawer: DrawerApp(),
         body: FutureBuilder(
-            // future: fetchWatchList(),
+            future: fetchProvince(),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
                 return const Center(child: CircularProgressIndicator());
@@ -36,47 +37,44 @@ class _ThingsToDoPageState extends State<ThingsToDoPage> {
                   );
                 } else {
                   return ListView.builder(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (_, index) => InkWell(
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 12),
-                                padding: const EdgeInsets.all(20.0),
-                                decoration: BoxDecoration(
-                                    color:Colors.white,
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    boxShadow: const [
-                                    BoxShadow(
-                                        color: Colors.black,
-                                        blurRadius: 2.0
-                                    )
-                                    ]
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (_, index) => InkWell(
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 12),
+                        padding: const EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15.0),
+                            boxShadow: const [
+                              BoxShadow(color: Colors.black, blurRadius: 2.0)
+                            ]),
+                        child: ListTile(
+                                // leading: FlutterLogo(size: 72.0),
+                                title: Text(
+                                    "${snapshot.data![index].fields.title}"),
+                                subtitle: Text(
+                                  "${snapshot.data![index].fields.header}",
                                 ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "${snapshot.data![index].fields.title}",
-                                      style: const TextStyle(
-                                        fontSize: 18.0,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                // trailing: Icon(Icons.more_vert),
+                                isThreeLine: true,
                               ),
-                              onTap: () {
-                                // Route menu ke halaman detail
-                                // showedWatchList = snapshot.data![index];
-                                // indexStatus = index;
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const DetailPage()),
-                                );
-                              },
-                            ),
-                      );
+                      ),
+                      onTap: () {
+                        // Route menu ke halaman detail
+                        // showedWatchList = snapshot.data![index];
+                        // indexStatus = index;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailThingsPage(
+                                  provId: snapshot.data![index].pk,
+                                  provName:
+                                      snapshot.data![index].fields.title)),
+                        );
+                      },
+                    ),
+                  );
                 }
               }
             }));

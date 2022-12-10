@@ -13,12 +13,12 @@ class DrawerApp extends StatelessWidget {
         children: [
           // Menambahkan clickable menu
           ListTile(
-            title: const Text('Things to Do'),
+            title: const Text('Home'),
             onTap: () {
               // Route menu ke halaman form
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => ThingsToDoPage()),
+                MaterialPageRoute(builder: (context) => const MyHomePage(title: 'Cultural Center'))
               );
             },
           ),
