@@ -110,7 +110,14 @@ class _LoginPageState extends State<LoginPage> {
 
                       if (response["status"] == true) {
                         // ignore: use_build_context_synchronously
-                        Navigator.of(context).pop();
+                        // show success message
+                        // ignore: use_build_context_synchronously
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Login Berhasil!'),
+                          ),
+                        );
+                        // Navigator.of(context).pop();
                       } else {
                         setState(() {
                           _errorMessage = response["message"];
