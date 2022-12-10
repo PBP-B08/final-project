@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: const InputDecoration(
                       hintText: "username",
                       labelText: "username",
-                      icon: Icon(Icons.people, color: Colors.blue),
+                      icon: Icon(Icons.people, color: Colors.lightGreen),
                     ),
                     controller: usernameController,
                     validator: (value) {
@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                         // child: const Icon(Icons.remove_red_eye),
                       
                       ),
-                      icon: const Icon(Icons.lock, color: Colors.blue),
+                      icon: const Icon(Icons.lock, color: Colors.lightGreen),
                     ),
                     controller: passwordController,
                     validator: (value) {
