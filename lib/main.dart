@@ -77,22 +77,29 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            // button to redirect to login page
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/login");
+              },
+              child: const Text('Login'),
+            ),
           ],
         ),
       ),
       // button to redirect to login page
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, "/login");
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.label),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
       // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
+      //   onPressed: () {
+      //     Navigator.pushNamed(context, "/login");
+      //   },
+      //   tooltip: 'Login',
+      //   child: const Icon(Icons.label),
       // ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
