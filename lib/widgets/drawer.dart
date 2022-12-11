@@ -4,6 +4,7 @@ import 'package:cultural_center/modules/recommendation/recommendation.dart';
 import '../modules/things-to-do/page/main_things.dart';
 import 'package:flutter/material.dart';
 import 'package:cultural_center/main.dart';
+import 'package:cultural_center/modules/event_calendar/calendar.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -39,7 +40,19 @@ class MyDrawer extends StatelessWidget {
               // close navigation drawer before
               Navigator.pop(context);
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const RecommendationPage()),
+                MaterialPageRoute(
+                    builder: (context) => const RecommendationPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Event Calendar'),
+            leading: const Icon(Icons.travel_explore),
+            onTap: () {
+              // Route menu ke halaman form
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => Calendar()),
               );
             },
           ),
