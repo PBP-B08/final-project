@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-// import 'package:cultural_center/modules/recommendation/models/province.dart';
 import 'package:cultural_center/modules/things-to-do/model/province.dart';
 
 Future<List<Province>> fetchProvince() async {
