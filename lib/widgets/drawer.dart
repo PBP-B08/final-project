@@ -1,6 +1,7 @@
 import 'package:cultural_center/modules/faq_review/page/faq.dart';
 import 'package:cultural_center/modules/faq_review/page/review.dart';
 import 'package:cultural_center/modules/recommendation/recommendation.dart';
+import '../modules/culture-highlights/screens/culture-highlights-screen.dart';
 import '../modules/things-to-do/page/main_things.dart';
 import 'package:flutter/material.dart';
 import 'package:cultural_center/main.dart';
@@ -40,6 +41,16 @@ class MyDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => const RecommendationPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Culture Highlights'),
+            leading: const Icon(Icons.highlight),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => CultureHighlightsScreen()),
               );
             },
           ),
