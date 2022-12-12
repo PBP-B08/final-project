@@ -57,10 +57,13 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // add padding to the text
+            Image.asset('assets/main-img.png',
+                width: 300,
+                height: 400),
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'This is the landing page',
+                'Begin Your Journey in Indonesia',
               ),
             ),
             // button to redirect to login page
