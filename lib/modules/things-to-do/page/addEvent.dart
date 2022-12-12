@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cultural_center/widgets/drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'detail.dart';
+import 'detailEvent.dart';
 
 class AddEventPage extends StatefulWidget {
   final int provId;
@@ -33,8 +32,6 @@ class _AddEventPageState extends State<AddEventPage> {
       appBar: AppBar(
         title: Text("Add $provName's Event"),
       ),
-      // Menambahkan drawer menu
-      drawer: const MyDrawer(),
       body: Form(
         key: _formKey,
         child: Container(
@@ -239,13 +236,16 @@ class _AddEventPageState extends State<AddEventPage> {
                               const SizedBox(height: 20),
                               TextButton(
                                 onPressed: () {
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
                                   Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => DetailThingsPage(
-                                            provId: provId,
-                                            provName: provName)),
-                                  );
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext context) => EventPage(
+                                                      provId: provId,
+                                                      provName: provName)
+                                              )
+                                        );
                                 },
                                 child: const Text('Kembali'),
                               ),

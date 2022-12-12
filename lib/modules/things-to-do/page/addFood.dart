@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cultural_center/widgets/drawer.dart';
- import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'detail.dart';
+import 'detailFood.dart';
 
 class AddFoodPage extends StatefulWidget {
   final int provId;
@@ -30,8 +29,6 @@ class _AddFoodPageState extends State<AddFoodPage> {
         appBar: AppBar(
           title: Text("Add $provName's Food"),
         ),
-        // Menambahkan drawer menu
-        drawer: const MyDrawer(),
         body: Form(
           key: _formKey,
           child: Container(
@@ -177,16 +174,20 @@ class _AddFoodPageState extends State<AddFoodPage> {
                                   shrinkWrap: true,
                                   children: <Widget>[
                                     const Center(
-                                        child: Text('Data sudah berhasil dibuat')),
+                                        child: Text('Berhasil menambah makanan')),
                                     const SizedBox(
                                         height: 20),
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.pushReplacement(context, 
-                                        MaterialPageRoute(
-                                            builder: (context) => DetailThingsPage(
-                                            provId: provId,
-                                            provName: provName)),
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
+                                        Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext context) => FoodPage(
+                                                      provId: provId,
+                                                      provName: provName)
+                                              )
                                         );
                                       },
                                       child: const Text('Kembali'),
