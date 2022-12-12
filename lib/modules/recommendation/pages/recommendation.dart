@@ -1,7 +1,6 @@
 import 'package:cultural_center/modules/recommendation/pages/add_province.dart';
 import 'package:flutter/material.dart';
 import 'package:cultural_center/widgets/drawer.dart';
-// import 'package:cultural_center/modules/recommendation/models/province.dart';
 import 'package:cultural_center/modules/things-to-do/model/province.dart';
 import 'package:cultural_center/modules/recommendation/utils/fetch_province.dart';
 import 'package:cultural_center/modules/recommendation/pages/province_detail.dart';
@@ -31,6 +30,7 @@ class _RecommendationPage extends State<RecommendationPage> {
                 MaterialPageRoute(
                     builder: (context) => ProvinceDetail(
                           province: province,
+                          provinceID: province.pk,
                         )));
           },
         );
