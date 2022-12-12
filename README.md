@@ -1,4 +1,5 @@
 # Cultural Center
+[![Build status](https://build.appcenter.ms/v0.1/apps/d55c1cb6-2d8b-4405-9284-9263e63baa56/branches/main/badge)](https://appcenter.ms)
 
 > Proyek ini dibuat untuk memenuhi tugas Proyek Akhir Semester
 > pada mata kuliah Pemrograman Berbasis Platform (CSGE602022) yang
