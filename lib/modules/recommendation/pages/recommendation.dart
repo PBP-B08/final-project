@@ -1,3 +1,4 @@
+import 'package:cultural_center/modules/recommendation/pages/add_province.dart';
 import 'package:flutter/material.dart';
 import 'package:cultural_center/widgets/drawer.dart';
 // import 'package:cultural_center/modules/recommendation/models/province.dart';
@@ -49,33 +50,52 @@ class _RecommendationPage extends State<RecommendationPage> {
         );
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Culture Center'),
       ),
       drawer: const MyDrawer(),
-      body: FutureBuilder(
-          future: fetchProvince(),
-          builder: (context, AsyncSnapshot snapshot) {
-            if (snapshot.data == null) {
-              return const Center(child: CircularProgressIndicator());
-            } else {
-              if (!snapshot.hasData) {
-                return Column(
-                  children: const [
-                    Text(
-                      "Recommendation is empty!",
-                      style: TextStyle(color: Color.fromARGB(255, 18, 226, 84), fontSize: 20),
-                    ),
-                    SizedBox(height: 8),
-                  ],
-                );
-              } else {
-                return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (_, index) => addCard(snapshot.data![index]));
-              }
-            }
-          }),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            FutureBuilder(
+                future: fetchProvince(),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.data == null) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    if (!snapshot.hasData) {
+                      return Column(
+                        children: const [
+                          Text(
+                            "Recommendation is empty!",
+                            style: TextStyle(color: Color.fromARGB(255, 18, 226, 84), fontSize: 20),
+                          ),
+                          SizedBox(height: 8),
+                        ],
+                      );
+                    } else {
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (_, index) => addCard(snapshot.data![index]));
+                    }
+                  }
+                }),
+          ],
+        ),
+      ),
+      // button add province
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const AddProvinceFormPage()));
+        },
+        backgroundColor: Colors.lightGreen,
+        child: const Icon(Icons.add),
+      ),
+      
+      
     );
   }
 }
