@@ -6,15 +6,17 @@ import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class AddAreaFormPage extends StatefulWidget {
-  const AddAreaFormPage({Key? key}) : super(key: key);
+  final int provinceId;
+  const AddAreaFormPage({super.key, required this.provinceId});
 
   @override
-  State<AddAreaFormPage> createState() => _AddAreaFormPage();
+  State<AddAreaFormPage> createState() => _AddAreaFormPage(provinceId);
 }
 
 class _AddAreaFormPage extends State<AddAreaFormPage> {
   final _formKey = GlobalKey<FormState>();
 
+  final int provinceId;
   final titleController = TextEditingController();
   final summaryController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -25,6 +27,7 @@ class _AddAreaFormPage extends State<AddAreaFormPage> {
   String description = "";
   String image = "";
 
+  _AddAreaFormPage(this.provinceId);
 
   // function for clearing the text fields
   void clearText() {
@@ -59,8 +62,7 @@ class _AddAreaFormPage extends State<AddAreaFormPage> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Text("Add Area",
-                          style: TextStyle(fontSize: 30)),
+                      const Text("Add Area", style: TextStyle(fontSize: 30)),
                       TextFormField(
                           decoration: const InputDecoration(
                             hintText: "title",
@@ -78,7 +80,8 @@ class _AddAreaFormPage extends State<AddAreaFormPage> {
                           decoration: const InputDecoration(
                             hintText: "summary",
                             labelText: "summary",
-                            icon: Icon(Icons.summarize, color: Colors.lightGreen),
+                            icon:
+                                Icon(Icons.summarize, color: Colors.lightGreen),
                           ),
                           controller: summaryController,
                           validator: (value) {
@@ -91,9 +94,10 @@ class _AddAreaFormPage extends State<AddAreaFormPage> {
                           decoration: const InputDecoration(
                             hintText: "description",
                             labelText: "description",
-                            icon: Icon(Icons.description, color: Colors.lightGreen),
+                            icon: Icon(Icons.description,
+                                color: Colors.lightGreen),
                           ),
-                          controller: summaryController,
+                          controller: descriptionController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter description';
@@ -124,11 +128,12 @@ class _AddAreaFormPage extends State<AddAreaFormPage> {
                                 imageController.text != "") {
                               await request
                                   .post(
-                                      'https://cultural-center.up.railway.app/recommendation/addProvince/',
+                                      'https://cultural-center.up.railway.app/recommendation/detail/$provinceId/addArea/',
                                       jsonDecode(jsonEncode({
                                         "title": titleController.text,
                                         "summary": summaryController.text,
-                                        "description": descriptionController.text,
+                                        "description":
+                                            descriptionController.text,
                                         "image": imageController.text,
                                       })))
                                   .then((value) => {

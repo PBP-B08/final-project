@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cultural_center/modules/recommendation/pages/add_area.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:cultural_center/widgets/drawer.dart';
@@ -33,8 +34,9 @@ Future<List<Area>> fetchArea(int provinceID) async {
 
 class ProvinceDetail extends StatelessWidget {
   final Province province;
+  final int provinceID;
 
-  const ProvinceDetail({Key? key, required this.province}) : super(key: key);
+  const ProvinceDetail({Key? key, required this.province, required this.provinceID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -176,9 +178,39 @@ class ProvinceDetail extends StatelessWidget {
       // ],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pop(context);
+          // route to add area page
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AddAreaFormPage(
+                        provinceId: province.pk,
+                      )));
         },
-        child: const Icon(Icons.arrow_back),
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+// A Widget that extracts the necessary arguments from
+// the ModalRoute.
+class ExtractArguments extends StatelessWidget {
+  const ExtractArguments({super.key});
+
+  static const routeName = '/extractArguments';
+
+  @override
+  Widget build(BuildContext context) {
+    // Extract the arguments from the current ModalRoute
+    // settings and cast them as ScreenArguments.
+    final args = ModalRoute.of(context)!.settings.arguments as ProvinceDetail;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(args.province.fields.title),
+      ),
+      body: Center(
+        child: Text(args.provinceID.toString()),
       ),
     );
   }
