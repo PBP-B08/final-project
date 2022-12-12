@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // add padding to the text
-            Image.asset('main-img.png',
+            Image.asset('assets/main-img.png',
                 width: 300,
                 height: 400),
             const Padding(
