@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cultural_center/modules/recommendation/pages/recommendation.dart';
 import 'package:cultural_center/widgets/drawer.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +18,7 @@ class _AddProvinceFormPage extends State<AddProvinceFormPage> {
   final headerController = TextEditingController();
   final summaryController = TextEditingController();
   final imageController = TextEditingController();
+
 
   String title = "";
   String header = "";
@@ -209,7 +209,7 @@ class _AddProvinceFormPage extends State<AddProvinceFormPage> {
                           // back to recommendation page
                           Navigator.of(context).pop();
                         },
-                        child: const Text('Ramanti ngising'),
+                        child: const Text('Back'),
                       ),
                     ]))));
   }
