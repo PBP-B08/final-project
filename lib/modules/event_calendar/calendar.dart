@@ -1,19 +1,19 @@
 // ignore_for_file: prefer_final_fields
-
-import 'package:cultural_center/modules/things-to-do/API/fetchProvince.dart';
-
+import "package:shared_preferences/shared_preferences.dart";
 import 'model/event.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cultural_center/widgets/drawer.dart';
 
 class Calendar extends StatefulWidget {
+  const Calendar({Key? key}) : super(key: key);
+
   @override
-  _CalendarState createState() => _CalendarState();
+  State<Calendar> createState() => _CalendarState();
 }
 
 class _CalendarState extends State<Calendar> {
-  late Map<DateTime, List<Fields>> selectedEvents;
+  late Map<DateTime, List<Fields>> _events;
   CalendarFormat format = CalendarFormat.month;
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
@@ -24,12 +24,12 @@ class _CalendarState extends State<Calendar> {
 
   @override
   void initState() {
-    selectedEvents = {};
     super.initState();
+    _events = {};
   }
 
   List<Fields> _getEventsfromDay(DateTime date) {
-    return selectedEvents[date] ?? [];
+    return _events[date] ?? [];
   }
 
   @override
@@ -54,9 +54,9 @@ class _CalendarState extends State<Calendar> {
           firstDay: DateTime(1990),
           lastDay: DateTime(2050),
           calendarFormat: format,
-          onFormatChanged: (CalendarFormat _format) {
+          onFormatChanged: (CalendarFormat format) {
             setState(() {
-              format = _format;
+              format = format;
             });
           },
           startingDayOfWeek: StartingDayOfWeek.sunday,
@@ -68,6 +68,7 @@ class _CalendarState extends State<Calendar> {
               selectedDay = selectDay;
               focusedDay = focusDay;
             });
+            // ignore: avoid_print
             print(focusedDay);
           },
           selectedDayPredicate: (DateTime date) {
@@ -113,9 +114,12 @@ class _CalendarState extends State<Calendar> {
           ),
         ),
         ..._getEventsfromDay(selectedDay).map(
-          (Fields field) => ListTile(
-            title: Text(field.name),
-            subtitle: Text(field.description),
+          (Fields field) => Card(
+            child: ListTile(
+              title: Text(field.name),
+              subtitle: Text(field.description),
+              isThreeLine: true,
+            ),
           ),
         ),
       ]),
@@ -153,8 +157,8 @@ class _CalendarState extends State<Calendar> {
                       _nameController.text.isEmpty ||
                       _descriptionController.text.isEmpty) {
                   } else {
-                    if (selectedEvents[selectedDay] != null) {
-                      selectedEvents[selectedDay]?.add(
+                    if (_events[selectedDay] != null) {
+                      _events[selectedDay]?.add(
                         Fields(
                             province: _provinceController.text,
                             name: _nameController.text,
@@ -163,7 +167,7 @@ class _CalendarState extends State<Calendar> {
                             image: ""),
                       );
                     } else {
-                      selectedEvents[selectedDay] = [
+                      _events[selectedDay] = [
                         Fields(
                             province: _provinceController.text,
                             name: _nameController.text,

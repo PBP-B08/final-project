@@ -76,8 +76,7 @@ class _AddEventPageState extends State<AddEventPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: 
-                        "Contoh: Pekan pertemuan ini sangat meriah",
+                    hintText: "Contoh: Pekan pertemuan ini sangat meriah",
                     labelText: "Deskripsi",
                     // Menambahkan circular border agar lebih rapi
                     border: OutlineInputBorder(
@@ -156,13 +155,13 @@ class _AddEventPageState extends State<AddEventPage> {
                                   2000), //DateTime.now() - not to allow to choose before today.
                               lastDate: DateTime(2101))
                           .then((newDate) {
-                              //tambahkan setState dan panggil variabel _dateTime.
-                              setState(() {
-                                date = newDate!;
-                                dateController.text =
-                                    date.toString().substring(0, 10);
-                              });
-                          });
+                        //tambahkan setState dan panggil variabel _dateTime.
+                        setState(() {
+                          date = newDate!;
+                          dateController.text =
+                              date.toString().substring(0, 10);
+                        });
+                      });
                     }),
               ),
             ],
@@ -239,13 +238,12 @@ class _AddEventPageState extends State<AddEventPage> {
                                   Navigator.pop(context);
                                   Navigator.pop(context);
                                   Navigator.pushReplacement(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (BuildContext context) => EventPage(
-                                                      provId: provId,
-                                                      provName: provName)
-                                              )
-                                        );
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              EventPage(
+                                                  provId: provId,
+                                                  provName: provName)));
                                 },
                                 child: const Text('Kembali'),
                               ),
