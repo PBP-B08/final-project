@@ -119,7 +119,7 @@ class _PlanYourTripState extends State<PlanYourTrip> {
                                             Row(
                                               children: [
                                                 const Icon(Icons
-                                                    .supervised_user_circle_rounded),
+                                                    .place),
                                                 Text(
                                                   "${snapshot.data![index].fields.destinasi}",
                                                 ),
@@ -128,7 +128,7 @@ class _PlanYourTripState extends State<PlanYourTrip> {
                                             Row(
                                               children: [
                                                 const Icon(
-                                                    Icons.reviews_outlined),
+                                                    Icons.sports_baseball),
                                                 Text(
                                                   "${snapshot.data![index].fields.aktivitas}",
                                                 ),
@@ -137,7 +137,7 @@ class _PlanYourTripState extends State<PlanYourTrip> {
                                             Row(
                                               children: [
                                                 const Icon(
-                                                    Icons.reviews_outlined),
+                                                    Icons.description),
                                                 Text(
                                                   "${snapshot.data![index].fields.deskripsi}",
                                                 ),
