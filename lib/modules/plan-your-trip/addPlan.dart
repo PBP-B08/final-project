@@ -19,7 +19,9 @@ class _AddPlanPageState extends State<AddPlanPage> {
   int _hari = 0;
   int _orang = 0;
   String _deskripsi = "";
-  var c1 = Color.fromARGB(255, 112, 169, 239);
+  var color1 = Color.fromARGB(255, 77, 235, 135);
+  var color2 = Color.fromARGB(255, 135, 243, 184);
+  var color3 = Color.fromARGB(255, 182, 255, 222);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +74,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
                                         gradient: LinearGradient(
                                             begin: Alignment.topRight,
                                             end: Alignment.bottomRight,
-                                            colors: [c1])),
+                                            colors: [color1, color2, color3])),
                                     padding: const EdgeInsets.all(80),
                                     child: Column(
                                       children: [
@@ -147,7 +149,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
                                           child: TextFormField(
                                             decoration: InputDecoration(
                                               hintText: "Aktivitas",
-                                              labelText: "Bermain di Dufan dan makan takoyaki",
+                                              labelText: "Aktivitas",
                                               icon:
                                               const Icon(Icons.local_activity_outlined),
                                               border: OutlineInputBorder(
@@ -180,7 +182,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
                                           child: TextFormField(
                                             decoration: InputDecoration(
                                               hintText: "Hari",
-                                              labelText: "2",
+                                              labelText: "Jumlah hari",
                                               icon:
                                               const Icon(Icons.calendar_month),
                                               border: OutlineInputBorder(
@@ -214,7 +216,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
                                           child: TextFormField(
                                             decoration: InputDecoration(
                                               hintText: "Jumlah orang",
-                                              labelText: "4",
+                                              labelText: "Jumlah orang",
                                               icon:
                                               const Icon(Icons.people),
                                               border: OutlineInputBorder(
@@ -248,7 +250,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
                                           child: TextFormField(
                                             decoration: InputDecoration(
                                               hintText: "Deskripsi",
-                                              labelText: "Me time sepuasnya!",
+                                              labelText: "Deskripsikan rencanamu!",
                                               icon:
                                               const Icon(Icons.description),
                                               border: OutlineInputBorder(
