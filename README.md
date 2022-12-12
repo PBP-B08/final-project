@@ -8,7 +8,7 @@
 
 ## Link Aplikasi
 
-Proyek ini dapat diunduh di [https://install.appcenter.ms/orgs/pbp-b08-2022/apps/cultural-center/distribution_groups/public](https://install.appcenter.ms/orgs/pbp-b08-2022/apps/cultural-center/distribution_groups/public)
+Proyek ini dapat diunduh di [sini](https://install.appcenter.ms/orgs/pbp-b08-2022/apps/cultural-center/distribution_groups/public)
 
 ## Pengembang Aplikasi
 
