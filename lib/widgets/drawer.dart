@@ -6,6 +6,7 @@ import '../modules/things-to-do/page/main_things.dart';
 import 'package:flutter/material.dart';
 import 'package:cultural_center/main.dart';
 import 'package:cultural_center/modules/event_calendar/calendar.dart';
+import 'package:cultural_center/modules/plan-your-trip/plan.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -43,6 +44,18 @@ class MyDrawer extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (context) => const RecommendationPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Plan Your Trip'),
+            leading: const Icon(Icons.airplane_ticket),
+            onTap: () {
+              // Update the state of the app.
+              Navigator.pop(context);
+              // Route menu ke halaman data
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const PlanYourTrip()),
               );
             },
           ),
