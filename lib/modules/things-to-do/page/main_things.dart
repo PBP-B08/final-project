@@ -18,7 +18,8 @@ class _ThingsToDoPageState extends State<ThingsToDoPage> {
           title: const Text('Things to Do'),
         ),
         drawer: const MyDrawer(),
-        body: FutureBuilder(
+        body: SingleChildScrollView(
+          child:FutureBuilder(
             future: fetchProvince(),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
@@ -37,6 +38,7 @@ class _ThingsToDoPageState extends State<ThingsToDoPage> {
                   );
                 } else {
                   return ListView.builder(
+                    scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemCount: snapshot.data!.length,
                     itemBuilder: (_, index) => InkWell(
@@ -129,6 +131,8 @@ class _ThingsToDoPageState extends State<ThingsToDoPage> {
                   );
                 }
               }
-            }));
+            })
+        )
+    );
   }
 }

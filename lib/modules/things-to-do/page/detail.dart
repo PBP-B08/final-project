@@ -1,20 +1,27 @@
+import 'package:cultural_center/modules/things-to-do/page/addEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:cultural_center/widgets/drawer.dart';
+import 'package:cultural_center/modules/things-to-do/page/addFood.dart';
 import 'package:cultural_center/modules/things-to-do/API/fetchEvent.dart';
 import 'package:cultural_center/modules/things-to-do/API/fetchFood.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class DetailThingsPage extends StatefulWidget {
   final int provId;
   final String provName;
 
-  const DetailThingsPage({Key? key, required this.provId, required this.provName}) : super(key: key);
+  const DetailThingsPage(
+      {Key? key, required this.provId, required this.provName})
+      : super(key: key);
 
   @override
-  State<DetailThingsPage> createState() => _DetailThingsPageState(provId, provName);
+  State<DetailThingsPage> createState() =>
+      _DetailThingsPageState(provId, provName);
 }
 
-class _DetailThingsPageState extends State<DetailThingsPage> 
-  with SingleTickerProviderStateMixin{
+class _DetailThingsPageState extends State<DetailThingsPage>
+    with SingleTickerProviderStateMixin {
   final int provId;
   final String provName;
   _DetailThingsPageState(this.provId, this.provName);
@@ -73,154 +80,159 @@ class _DetailThingsPageState extends State<DetailThingsPage>
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: Text("Things to Do in $provName"),
       ),
       drawer: const MyDrawer(),
-      body: SingleChildScrollView(child:
-      Column(children: [
-        const SizedBox(height: 30),
-        const Text("Food",
-          style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
-                )),
-        const SizedBox(height: 10),
-        FutureBuilder(
-            future: fetchFood(provId),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.data == null) {
-                return const Center(child: CircularProgressIndicator());
-              } else {
-                if (!snapshot.hasData) {
-                  return Column(
-                    children: const [
-                      Text(
-                        "Tidak ada makanan :(",
-                        style:
-                            TextStyle(color: Color(0xff59A5D8), fontSize: 20),
-                      ),
-                      SizedBox(height: 10),
-                    ],
-                  );
-                } else {
-                  return ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (_, index) => Container(
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          child: SingleChildScrollView(
+              child: Column(
+            children: [
+              const SizedBox(height: 30),
+              const Text("Food",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  )),
+              const SizedBox(height: 10),
+              FutureBuilder(
+                  future: fetchFood(provId),
+                  builder: (context, AsyncSnapshot snapshot) {
+                    if (snapshot.data == null) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      if (!snapshot.hasData) {
+                        return Column(
+                          children: const [
+                            Text(
+                              "Tidak ada makanan :(",
+                              style: TextStyle(
+                                  color: Color(0xff59A5D8), fontSize: 20),
+                            ),
+                            SizedBox(height: 10),
+                          ],
+                        );
+                      } else {
+                        return Container(
+                            height: MediaQuery.of(context).size.height,
+                            child: ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: snapshot.data!.length,
+                                itemBuilder: (_, index) => Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 12),
+                                  padding: const EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                            color: Colors.black, blurRadius: 2.0)
+                                      ]),
+                                  child: ListTile(
+                                    leading: Image.network(
+                                      "${snapshot.data![index].fields.image}",
+                                      // width: 300,
+                                      // height: 250,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    title:
+                                        Text("${snapshot.data![index].fields.name}"),
+                                    subtitle: Text(
+                                      "${snapshot.data![index].fields.description}",
+                                    ),
+                                    // trailing: Icon(Icons.more_vert),
+                                    isThreeLine: true,
+                                  ),
+                                ),
+                              ));
+                      }
+                    }
+                  }),
+              const SizedBox(height: 30),
+              const Text("Event",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  )),
+              const SizedBox(height: 10),
+              FutureBuilder(
+                  future: fetchEvent(provId),
+                  builder: (context, AsyncSnapshot snapshot) {
+                    if (snapshot.data == null) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      if (!snapshot.hasData) {
+                        return Column(
+                          children: const [
+                            Text(
+                              "Tidak ada event :(",
+                              style: TextStyle(
+                                  color: Color(0xff59A5D8), fontSize: 20),
+                            ),
+                            SizedBox(height: 10),
+                          ],
+                        );
+                      } else {
+                        return Container(
+                          height: MediaQuery.of(context).size.height,
+                          child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (_, index) => Container(
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 12),
                                 padding: const EdgeInsets.all(10.0),
                                 decoration: BoxDecoration(
-                                    color:Colors.white,
+                                    color: Colors.white,
                                     borderRadius: BorderRadius.circular(15.0),
                                     boxShadow: const [
-                                    BoxShadow(
-                                        color: Colors.black,
-                                        blurRadius: 2.0
-                                    )
-                                    ]
-                                ),
+                                      BoxShadow(
+                                          color: Colors.black, blurRadius: 2.0)
+                                    ]),
                                 child: ListTile(
-                                          leading: Image.network(
-                                            "${snapshot.data![index].fields.image}",
-                                            // width: 300,
-                                            // height: 250,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          title: Text("${snapshot.data![index].fields.name}"),
-                                          subtitle: Text(
-                                            "${snapshot.data![index].fields.description}",
-                                          ),
-                                          // trailing: Icon(Icons.more_vert),
-                                          isThreeLine: true,
-                                        ),
-                                      ),
-                      );
-                }
-              }
-            }),
-            const SizedBox(height: 30),
-            const Text("Event",
-              style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                    )),
-            const SizedBox(height: 10),
-            FutureBuilder(
-                future: fetchEvent(provId),
-                builder: (context, AsyncSnapshot snapshot) {
-                  if (snapshot.data == null) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    if (!snapshot.hasData) {
-                      return Column(
-                        children: const [
-                          Text(
-                            "Tidak ada event :(",
-                            style:
-                                TextStyle(color: Color(0xff59A5D8), fontSize: 20),
-                          ),
-                          SizedBox(height: 10),
-                        ],
-                      );
-                    } else {
-                      return ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (_, index) => Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 16, vertical: 12),
-                                    padding: const EdgeInsets.all(10.0),
-                                    decoration: BoxDecoration(
-                                        color:Colors.white,
-                                        borderRadius: BorderRadius.circular(15.0),
-                                        boxShadow: const [
-                                        BoxShadow(
-                                            color: Colors.black,
-                                            blurRadius: 2.0
-                                        )
-                                        ]
-                                    ),
-                                    child: ListTile(
-                                              leading: Image.network(
-                                                "${snapshot.data![index].fields.image}",
-                                                // width: 300,
-                                                // height: 250,
-                                                fit: BoxFit.cover,
-                                              ),
-                                              title: Text("${snapshot.data![index].fields.name}"),
-                                              subtitle: Text(
-                                                "${snapshot.data![index].fields.description}",
-                                              ),
-                                              trailing: Text("${snapshot.data![index].fields.date.toString().substring(0, 11)}"),
-                                              isThreeLine: true,
-                                            ),
-                                          ),
-                          );
+                                  leading: Image.network(
+                                    "${snapshot.data![index].fields.image}",
+                                    // width: 300,
+                                    // height: 250,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  title:
+                                      Text("${snapshot.data![index].fields.name}"),
+                                  subtitle: Text(
+                                    "${snapshot.data![index].fields.description}",
+                                  ),
+                                  trailing: Text(
+                                      "${snapshot.data![index].fields.date.toString().substring(0, 11)}"),
+                                  isThreeLine: true,
+                                ),
+                              ),
+                            ),
+                        );
+                      }
                     }
-                  }
-                }),
-                const SizedBox(height: 20),
-                TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.all(16.0),
-                      textStyle: const TextStyle(fontSize: 20),
-                      minimumSize: const Size.fromHeight(5),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Back'),
-                  ),   
-          ],
-        )
-      ),
+                  }),
+              const SizedBox(height: 20),
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.all(16.0),
+                  textStyle: const TextStyle(fontSize: 20),
+                  minimumSize: const Size.fromHeight(5),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Back'),
+              ),
+            ],
+          ))),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -231,8 +243,43 @@ class _DetailThingsPageState extends State<DetailThingsPage>
               0.0,
             ),
             child: FloatingActionButton(
+              heroTag: "btn1",
               backgroundColor: Colors.blue,
-              onPressed: () {/* Do something */},
+              onPressed: () async {
+                !request.loggedIn
+                    ? showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 15,
+                            child: ListView(
+                              padding:
+                                  const EdgeInsets.only(top: 20, bottom: 20),
+                              shrinkWrap: true,
+                              children: <Widget>[
+                                const Center(
+                                    child: Text('Mohon Login Terlebih Dahulu')),
+                                const SizedBox(height: 20),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Kembali'),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      )
+                    : Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => AddFoodPage(
+                                provId: provId, provName: provName)));
+              },
               child: const Icon(
                 Icons.food_bank,
               ),
@@ -245,8 +292,43 @@ class _DetailThingsPageState extends State<DetailThingsPage>
               0,
             ),
             child: FloatingActionButton(
+              heroTag: "btn2",
               backgroundColor: Colors.yellow,
-              onPressed: () {/* Do something */},
+              onPressed: () async {
+                !request.loggedIn
+                    ? showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 15,
+                            child: ListView(
+                              padding:
+                                  const EdgeInsets.only(top: 20, bottom: 20),
+                              shrinkWrap: true,
+                              children: <Widget>[
+                                const Center(
+                                    child: Text('Mohon Login Terlebih Dahulu')),
+                                const SizedBox(height: 20),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Kembali'),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      )
+                    : Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => AddEventPage(
+                                provId: provId, provName: provName)));
+              },
               child: const Icon(
                 Icons.event,
               ),
@@ -254,6 +336,7 @@ class _DetailThingsPageState extends State<DetailThingsPage>
           ),
           // This is the primary FAB
           FloatingActionButton(
+            heroTag: "btn3",
             onPressed: _toggle,
             child: AnimatedIcon(
               icon: AnimatedIcons.menu_close,
