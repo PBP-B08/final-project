@@ -1,8 +1,6 @@
-gradle-wrapper.jar
+# add comment for app center
 /.gradle
 /captures/
-/gradlew
-/gradlew.bat
 /local.properties
 GeneratedPluginRegistrant.java
 

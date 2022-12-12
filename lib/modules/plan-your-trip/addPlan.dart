@@ -23,6 +23,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
   var color2 = Color.fromARGB(255, 135, 243, 184);
   var color3 = Color.fromARGB(255, 182, 255, 222);
 
+
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -149,7 +150,9 @@ class _AddPlanPageState extends State<AddPlanPage> {
                                           child: TextFormField(
                                             decoration: InputDecoration(
                                               hintText: "Aktivitas",
+
                                               labelText: "Aktivitas",
+
                                               icon:
                                               const Icon(Icons.local_activity_outlined),
                                               border: OutlineInputBorder(
@@ -182,7 +185,10 @@ class _AddPlanPageState extends State<AddPlanPage> {
                                           child: TextFormField(
                                             decoration: InputDecoration(
                                               hintText: "Hari",
+
                                               labelText: "Jumlah hari",
+
+
                                               icon:
                                               const Icon(Icons.calendar_month),
                                               border: OutlineInputBorder(
@@ -216,7 +222,9 @@ class _AddPlanPageState extends State<AddPlanPage> {
                                           child: TextFormField(
                                             decoration: InputDecoration(
                                               hintText: "Jumlah orang",
+
                                               labelText: "Jumlah orang",
+
                                               icon:
                                               const Icon(Icons.people),
                                               border: OutlineInputBorder(
@@ -250,9 +258,11 @@ class _AddPlanPageState extends State<AddPlanPage> {
                                           child: TextFormField(
                                             decoration: InputDecoration(
                                               hintText: "Deskripsi",
+
                                               labelText: "Deskripsikan rencanamu!",
                                               icon:
                                               const Icon(Icons.description),
+                                             
                                               border: OutlineInputBorder(
                                                   borderRadius:
                                                   BorderRadius.circular(

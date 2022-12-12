@@ -14,7 +14,6 @@ class _WidgetModalReviewState extends State<WidgetModalReview>{
   final _formKey = GlobalKey<FormState>();
   String _judul = "";
   String _review = "";
-  // DateTime? _dateTime;
   var c1 = const Color(0Xffa770ef);
   var c2 = const Color(0Xffd8b4fe);
   var c3 = const Color(0Xfffdb99b);
@@ -43,23 +42,18 @@ class _WidgetModalReviewState extends State<WidgetModalReview>{
                   elevation: 15,
                   child: ListView(
                     padding:
-                        const EdgeInsets.only(
-                            top: 20,
-                            bottom: 20),
+                        const EdgeInsets.only(top: 20, bottom: 20),
                     shrinkWrap: true,
                     children: <Widget>[
                       const Center(
-                          child: Text(
-                              'Please Login!')),
-                      const SizedBox(
-                          height: 20),
+                          child: Text('Please Login!')
+                          ),
+                      const SizedBox(height: 20),
                       TextButton(
                         onPressed: () {
-                          Navigator.pop(
-                              context);
+                          Navigator.pop(context);
                         },
-                        child: const Text(
-                            'Kembali'),
+                        child: const Text('Kembali'),
                       ),
                     ],
                   ),

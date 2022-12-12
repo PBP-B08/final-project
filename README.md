@@ -1,4 +1,5 @@
 # Cultural Center
+[![Build status](https://build.appcenter.ms/v0.1/apps/d55c1cb6-2d8b-4405-9284-9263e63baa56/branches/main/badge)](https://appcenter.ms)
 
 > Proyek ini dibuat untuk memenuhi tugas Proyek Akhir Semester
 > pada mata kuliah Pemrograman Berbasis Platform (CSGE602022) yang
@@ -7,7 +8,7 @@
 
 ## Link Aplikasi
 
-Proyek ini dapat diakses di { coming soon! }
+Proyek ini dapat diunduh di [sini](https://install.appcenter.ms/orgs/pbp-b08-2022/apps/cultural-center/distribution_groups/public)
 
 ## Pengembang Aplikasi
 
@@ -80,6 +81,7 @@ Cultural Center merupakan aplikasi yang menjadi sarana mempromosikan kebudayaan 
 ### User Login
 
 - Membuat review baru pada halaman daerah
+- Menambah data makanan dan event baru pada halaman Things to Do
 - Mengakses semua modul dari user yang tidak login
 - Mengunjungi halaman dashboard profil dan memodifikasi profil
 - Mengakses halaman Plan Your Trip

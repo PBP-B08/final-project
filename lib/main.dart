@@ -4,6 +4,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cultural_center/authentication/login.dart';
 import 'package:cultural_center/modules/faq_review/page/review.dart';
+import 'authentication/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         home: const MyHomePage(title: 'Cultural Center'),
         routes: {
           "/login": (BuildContext context) => const LoginPage(),
+          "/register": (BuildContext context) => const RegisterPage(),
           "/review": (BuildContext context) => const MyReviewPage(), 
         },
       ),
@@ -72,6 +74,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.pushNamed(context, "/login");
               },
               child: const Text('Login'),
+            ),
+            // button to redirect to register page
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/register");
+              },
+              child: const Text('Register'),
+            ),
+            const SizedBox(height: 30),
+            const Text(
+                "Icon image: flaticon.com",
+                style: TextStyle(color: Colors.grey,
+                fontSize: 14),
             ),
           ],
         ),

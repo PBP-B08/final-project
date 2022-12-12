@@ -1,4 +1,4 @@
-import 'package:cultural_center/modules/faq_review/model/dataReview.dart';
+import 'package:cultural_center/modules/faq_review/model/modelReview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

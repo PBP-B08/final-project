@@ -3,6 +3,7 @@ import 'package:cultural_center/widgets/drawer.dart';
 import 'package:cultural_center/modules/faq_review/data/fetchDataReview.dart';
 import 'package:cultural_center/modules/faq_review/Widget/widgetReview.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'dart:convert';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -18,7 +19,7 @@ class _ReviewState extends State<MyReviewPage> {
     final _formKey = GlobalKey<FormState>();
     String _judul = "";
     String _review = "";
-    DateTime? _dateTime;
+    var outputFormat = DateFormat('MM/dd/yyyy');
     var c1 = const Color(0Xffa770ef);
     var c2 = const Color(0Xffd8b4fe);
     var c3 = const Color(0Xfffdb99b);
@@ -84,7 +85,7 @@ class _ReviewState extends State<MyReviewPage> {
                                     itemCount: snapshot.data!.length,
                                     itemBuilder: (_, index)=> Container(
                                     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                                    padding: const EdgeInsets.all(20.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Card(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(15.0) 
@@ -98,12 +99,14 @@ class _ReviewState extends State<MyReviewPage> {
                                                 Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
-                                                    Text(
-                                                      "${snapshot.data![index].fields.title}",
-                                                      style: const TextStyle(
-                                                      fontSize: 18.0,
-                                                      fontWeight: FontWeight.bold,
-                                                      ),
+                                                    Flexible(
+                                                      child:Text(
+                                                        "${snapshot.data![index].fields.title}",
+                                                        style: const TextStyle(
+                                                        fontSize: 18.0,
+                                                        fontWeight: FontWeight.bold,
+                                                        ),
+                                                      )
                                                     ),
                                                     IconButton(
                                                       onPressed: () async {
@@ -117,25 +120,40 @@ class _ReviewState extends State<MyReviewPage> {
                                                 ),
                                                 Row(
                                                   children: [
-                                                    const Icon(Icons.supervised_user_circle_rounded),
-                                                    Text(
-                                                      "${snapshot.data![index].fields.username}",
+                                                    const Icon(Icons.calendar_month),
+                                                    Flexible(
+                                                      child: Text(
+                                                      outputFormat.format(snapshot.data![index].fields.dateAdd),
                                                       ),
+                                                    ),
                                                   ],
                                                 ),
                                                 Row(
                                                   children: [
+                                                    const Icon(Icons.supervised_user_circle_rounded),
+                                                    Flexible(
+                                                      child: Text(
+                                                      "${snapshot.data![index].fields.username}",
+                                                      )
+                                                    ),
+                                                  ],
+                                                ),
+                                                const Spacer(flex: 4),
+                                                Row(
+                                                  children: [
                                                     const Icon(Icons.reviews_outlined),
-                                                    Text(
+                                                    Flexible(
+                                                      child: Text(
                                                       "${snapshot.data![index].fields.review}",
-                                                      ),
+                                                      )
+                                                    ),
                                                   ],
                                                 ),                                                                                                                                                
                                               ],
                                             ), 
                                             ),
                                         ),
-                                    ), 
+                                      ), 
                                     )
                                 );
                             }
