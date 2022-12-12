@@ -136,9 +136,6 @@ class _ReviewState extends State<MyReviewPage> {
                                                       "${snapshot.data![index].fields.username}",
                                                       )
                                                     ),
-                                                    Text(
-                                                      "${snapshot.data![index].fields.username}",
-                                                      ),
                                                   ],
                                                 ),
                                                 const Spacer(flex: 4),
