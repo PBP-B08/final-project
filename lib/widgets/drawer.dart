@@ -71,9 +71,9 @@ class MyDrawer extends StatelessWidget {
             title: const Text('Things to Do'),
             leading: const Icon(Icons.travel_explore),
             onTap: () {
-              // Route menu ke halaman form
-              Navigator.pushReplacement(
-                context,
+              // Update the state of the app.
+              Navigator.pop(context);
+              Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => ThingsToDoPage()),
               );
             },
