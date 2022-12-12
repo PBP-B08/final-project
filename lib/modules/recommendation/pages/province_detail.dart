@@ -79,58 +79,58 @@ class ProvinceDetail extends StatelessWidget {
         title: const Text('Province Detail'),
       ),
       drawer: const MyDrawer(),
-      body: SingleChildScrollView(
-        child: Container(
-            padding: const EdgeInsets.all(15),
-            child: Column(children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Text(
-                      province.fields.title,
-                      style: const TextStyle(
-                          fontSize: 25, fontWeight: FontWeight.bold),
+      body: Container(
+          padding: const EdgeInsets.all(15),
+          child: Column(children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text(
+                    province.fields.title,
+                    style: const TextStyle(
+                        fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    // ignore: unnecessary_null_comparison
+                    child: province.fields.image != null
+                        ? Image.network(
+                            province.fields.image,
+                            width: 300,
+                            height: 300,
+                          )
+                        : const Text('No image'),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                RichText(
+                  text: TextSpan(
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.black,
                     ),
+                    children: <TextSpan>[
+                      const TextSpan(
+                          text: 'Header: ',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: '${province.fields.header}\n'),
+                      const TextSpan(
+                          text: 'Summary: ',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: '${province.fields.summary}\n'),
+                    ],
                   ),
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(5),
-                      // ignore: unnecessary_null_comparison
-                      child: province.fields.image != null
-                          ? Image.network(
-                              province.fields.image,
-                              width: 300,
-                              height: 300,
-                            )
-                          : const Text('No image'),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  RichText(
-                    text: TextSpan(
-                      style: const TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                      ),
-                      children: <TextSpan>[
-                        const TextSpan(
-                            text: 'Header: ',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: '${province.fields.header}\n'),
-                        const TextSpan(
-                            text: 'Summary: ',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: '${province.fields.summary}\n'),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
-              FutureBuilder(
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+            Expanded(
+              child: FutureBuilder(
                   future: fetchArea(province.pk),
                   builder: (context, AsyncSnapshot snapshot) {
                     if (snapshot.data == null) {
@@ -157,8 +157,8 @@ class ProvinceDetail extends StatelessWidget {
                       }
                     }
                   }),
-            ])),
-      ),
+            ),
+          ])),
 
       // back button to previous page
       // persistentFooterButtons: [
@@ -176,6 +176,7 @@ class ProvinceDetail extends StatelessWidget {
       //     ),
       //   ),
       // ],
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // route to add area page
@@ -188,30 +189,21 @@ class ProvinceDetail extends StatelessWidget {
         },
         child: const Icon(Icons.add),
       ),
-    );
-  }
-}
-
-// A Widget that extracts the necessary arguments from
-// the ModalRoute.
-class ExtractArguments extends StatelessWidget {
-  const ExtractArguments({super.key});
-
-  static const routeName = '/extractArguments';
-
-  @override
-  Widget build(BuildContext context) {
-    // Extract the arguments from the current ModalRoute
-    // settings and cast them as ScreenArguments.
-    final args = ModalRoute.of(context)!.settings.arguments as ProvinceDetail;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(args.province.fields.title),
-      ),
-      body: Center(
-        child: Text(args.provinceID.toString()),
-      ),
+      persistentFooterButtons: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.lightGreen,
+            minimumSize: const Size.fromHeight(40),
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text(
+            'Back',
+            style: TextStyle(fontSize: 12),
+          ),
+        ),
+      ],
     );
   }
 }
