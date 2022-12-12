@@ -250,7 +250,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
                                               hintText: "Deskripsi",
                                               labelText: "Me time sepuasnya!",
                                               icon:
-                                              const Icon(Icons.golf_course_sharp),
+                                              const Icon(Icons.description),
                                               border: OutlineInputBorder(
                                                   borderRadius:
                                                   BorderRadius.circular(
