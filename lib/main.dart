@@ -73,6 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Login'),
             ),
+            const SizedBox(height: 30),
+            const Text(
+                "Icon image: flaticon.com",
+                style: TextStyle(color: Colors.grey,
+                fontSize: 14),
+            ),
           ],
         ),
       ),
