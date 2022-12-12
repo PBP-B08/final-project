@@ -34,9 +34,10 @@ class _PlanYourTripState extends State<PlanYourTrip> {
   int _orang = 0;
   String _deskripsi = "";
 
-  var c1 = Color.fromARGB(255, 77, 235, 135);
-  var c2 = Color.fromARGB(255, 135, 243, 184);
-  var c3 = Color.fromARGB(255, 182, 255, 222);
+
+  var color1 = Color.fromARGB(255, 77, 235, 135);
+  var color2 = Color.fromARGB(255, 135, 243, 184);
+  var color3 = Color.fromARGB(255, 182, 255, 222);
 
 
   @override
@@ -52,9 +53,11 @@ class _PlanYourTripState extends State<PlanYourTrip> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomRight,
                     colors: [
-                      c1,
-                      c2,
-                      c3,
+
+                      color1,
+                      color2,
+                      color3,
+
                     ])),
             child: Column(
               children: [
@@ -119,7 +122,9 @@ class _PlanYourTripState extends State<PlanYourTrip> {
                                             Row(
                                               children: [
                                                 const Icon(Icons
-                                                    .supervised_user_circle_rounded),
+
+                                                    .place),
+
                                                 Text(
                                                   "${snapshot.data![index].fields.destinasi}",
                                                 ),
@@ -128,7 +133,9 @@ class _PlanYourTripState extends State<PlanYourTrip> {
                                             Row(
                                               children: [
                                                 const Icon(
-                                                    Icons.reviews_outlined),
+
+                                                    Icons.sports_baseball),
+
                                                 Text(
                                                   "${snapshot.data![index].fields.aktivitas}",
                                                 ),
@@ -137,7 +144,9 @@ class _PlanYourTripState extends State<PlanYourTrip> {
                                             Row(
                                               children: [
                                                 const Icon(
-                                                    Icons.reviews_outlined),
+
+                                                    Icons.description),
+
                                                 Text(
                                                   "${snapshot.data![index].fields.deskripsi}",
                                                 ),
