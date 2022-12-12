@@ -330,7 +330,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
                                                                   TextButton(
                                                                     onPressed:
                                                                         () {
-                                                                      Navigator.popAndPushNamed(context, "/review");
+                                                                      Navigator.popAndPushNamed(context, "/plan");
                                                                     },
                                                                     child:
                                                                     const Text('Kembali'),
