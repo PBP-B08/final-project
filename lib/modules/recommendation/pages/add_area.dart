@@ -1,5 +1,6 @@
 import 'dart:convert';
 // import 'package:cultural_center/modules/recommendation/pages/recommendation.dart';
+import 'package:cultural_center/modules/recommendation/pages/recommendation.dart';
 import 'package:cultural_center/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -159,10 +160,10 @@ class _AddAreaFormPage extends State<AddAreaFormPage> {
                                                     onPressed: () {
                                                       // back to recommendation page
                                                       Navigator.pop(context);
-                                                      // Navigator.of(context).push(
-                                                      //   MaterialPageRoute(
-                                                      //       builder: (context) => const RecommendationPage()),
-                                                      // );
+                                                      Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (context) => const RecommendationPage()),
+                                                      );
                                                     },
                                                     child:
                                                         const Text('Kembali'),

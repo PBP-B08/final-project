@@ -18,21 +18,80 @@ class _RecommendationPage extends State<RecommendationPage> {
     ListTile addListTile(Province province) => ListTile(
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
-          title: Padding(
-            padding: const EdgeInsets.only(left: 12.0),
-            child: Text(
-              province.fields.title,
+          title: Card(
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.recommend),
+                  title: Text(province.fields.title),
+                  subtitle: Text(
+                    province.fields.header,
+                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    province.fields.summary,
+                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                  ),
+                ),
+                ButtonBar(
+                  alignment: MainAxisAlignment.start,
+                  children: [
+                    TextButton(
+                      // textColor: const Color(0xFF6200EE),
+                      onPressed: () {
+                        // Perform some action
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProvinceDetail(
+                                    province: province,
+                                    provinceID: province.pk,
+                                  )));
+                      },
+                      child: const Text('Details'),
+                    ),
+                    // TextButton(
+                    //   // textColor: const Color(0xFF6200EE),
+                    //   onPressed: () {
+                    //     // Perform some action
+                    //   },
+                    //   child: const Text('ACTION 2'),
+                    // ),
+                  ],
+                ),
+                Image.network(province.fields.image)
+                // Image.asset('assets/card-sample-image.jpg'),
+                // Image.asset('assets/card-sample-image-2.jpg'),
+              ],
             ),
           ),
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ProvinceDetail(
-                          province: province,
-                          provinceID: province.pk,
-                        )));
-          },
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 12.0),
+          //   child: Column(
+          //     children: [
+          //       ListTile(
+          //         leading: const Icon(Icons.icecream),
+          //         title: Text(province.fields.header),
+          //         // image: Image.network(province.fields.image),
+          //         subtitle: Text(province.fields.summary),
+          //         trailing: Icon(Icons.food_bank),
+          //       ),
+          //     ],
+          //   )
+          // ),
+          // onTap: () {
+          //   Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (context) => ProvinceDetail(
+          //                 province: province,
+          //                 provinceID: province.pk,
+          //               )));
+          // },
         );
 
     Card addCard(Province province) => Card(
@@ -55,10 +114,10 @@ class _RecommendationPage extends State<RecommendationPage> {
         title: const Text('Culture Center'),
       ),
       drawer: const MyDrawer(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            FutureBuilder(
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder(
                 future: fetchProvince(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.data == null) {
@@ -82,8 +141,8 @@ class _RecommendationPage extends State<RecommendationPage> {
                     }
                   }
                 }),
-          ],
-        ),
+          ),
+        ],
       ),
       // button add province
       floatingActionButton: FloatingActionButton(
